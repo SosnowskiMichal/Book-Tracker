@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23231" systemVersion="24C101" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Book" representedClassName="Book" syncable="YES">
+        <attribute name="author" optional="YES" attributeType="String"/>
+        <attribute name="bookDescription" optional="YES" attributeType="String"/>
+        <attribute name="dateAdded" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isFavourite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="key" optional="YES" attributeType="String"/>
+        <attribute name="publishYear" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="statusChangeDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="bookCover" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BookCover" inverseName="book" inverseEntity="BookCover"/>
+        <relationship name="bookNotes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="BookNote" inverseName="book" inverseEntity="BookNote"/>
+        <relationship name="collectionItems" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="BookCollectionItem" inverseName="book" inverseEntity="BookCollectionItem"/>
+    </entity>
+    <entity name="BookCollection" representedClassName="BookCollection" syncable="YES">
+        <attribute name="collectionDescription" optional="YES" attributeType="String"/>
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="collectionItems" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="BookCollectionItem" inverseName="collection" inverseEntity="BookCollectionItem"/>
+    </entity>
+    <entity name="BookCollectionItem" representedClassName="BookCollectionItem" syncable="YES">
+        <attribute name="dateAdded" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="book" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Book" inverseName="collectionItems" inverseEntity="Book"/>
+        <relationship name="collection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BookCollection" inverseName="collectionItems" inverseEntity="BookCollection"/>
+    </entity>
+    <entity name="BookCover" representedClassName="BookCover" syncable="YES">
+        <attribute name="bookKey" optional="YES" attributeType="String"/>
+        <attribute name="coverImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <relationship name="book" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Book" inverseName="bookCover" inverseEntity="Book"/>
+        <relationship name="goalItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GoalItem" inverseName="bookCover" inverseEntity="GoalItem"/>
+    </entity>
+    <entity name="BookNote" representedClassName="BookNote" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="dateAdded" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="book" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Book" inverseName="bookNotes" inverseEntity="Book"/>
+    </entity>
+    <entity name="Goal" representedClassName="Goal" syncable="YES">
+        <attribute name="booksRead" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="booksToRead" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="completionPercent" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="dateAdded" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="finishDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="goalItems" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GoalItem" inverseName="goal" inverseEntity="GoalItem"/>
+    </entity>
+    <entity name="GoalItem" representedClassName="GoalItem" syncable="YES">
+        <attribute name="dateAdded" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="bookCover" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BookCover" inverseName="goalItems" inverseEntity="BookCover"/>
+        <relationship name="goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="goalItems" inverseEntity="Goal"/>
+    </entity>
+</model>
